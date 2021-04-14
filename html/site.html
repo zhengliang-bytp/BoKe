@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+	<script src="../js/user.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url:"http://localhost/site/getSite",
+				type:"post",
+				headers:{
+					token:fn()
+				},
+				success:function(d){
+					console.log(d)
+				}
+			})
+		})
+	</script>
+</html>

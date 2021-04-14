@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" class="name" placeholder="名字">
+		<input type="text" class="tel" placeholder="手机号">
+		<input type="text" class="dq" placeholder="省、市、区、街道">
+		<input type="text" class="inDetail" placeholder="小区楼栋/乡村名称">
+		<button class="btn">保存</button>
+	</body>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+	<script src="../js/user.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function(){
+			$(".btn").click(function(){
+				var name=$(".name").val()
+				var tel=$(".tel").val()
+				var site=$(".dq").val()
+				var inDetail=$(".inDetail").val()
+				console.log(name,tel,site,inDetail)
+				$.ajax({
+					url:"http://localhost/site/addSite",
+					type:"post",
+					headers:{
+						token:fn()
+					},
+					data:{
+						name:name,
+						tel:tel,
+						site:site,
+						inDetail:inDetail
+					},
+					success:function(d){
+						console.log(d)
+						if(d.status==1){
+							window.location.href="site.html"
+						}
+					}
+				})
+			})
+			
+		})
+	</script>
+</html>

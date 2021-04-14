@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/reset.css">
+		<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+		<style>
+			.top li{
+				width:100px;
+				height:100px;
+				background: #000;
+				float:left;
+			}
+			ul{
+				height:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="heider">
+				<!-- <div class="content">
+				
+				</div> -->
+			</div>
+			<div class="center">
+				
+			</div>
+			<div class="content">
+				
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+	<script src="../js/user.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function(){
+			$.ajax({
+				url:"http://localhost/sp/getsp",
+				type:"post",
+				success:function(d){
+					console.log(d)
+					$.each(d.obj,function(i,obj){
+						// console.log(obj.nid)
+						var str=""
+						$.ajax({
+							url:"http://localhost/sp/getList",
+							type:"post",
+							data:{
+								nid:obj.nid
+							},
+							success:function(e){
+								console.log(e)
+								$.each(e.obj,function(i,obj){
+									// console.log(obj)
+									str+=`<li><a href="详情.html?${obj.pid}"><img src=""></a></li>`
+								})
+								var top=$("<div class='top'></top>")
+								top.append(`<h2 class="title">
+									文房四宝
+								</h2>
+								<time>活动时间: <span>长期</span></time>
+								<p>活动介绍:假一赔十，买一件，送十件，多买多送</p>
+								<ul>${str}</ul>
+								`
+								)
+								$(".content").append(top)
+							}
+						})
+					})
+				}
+			})
+			$.when(user()).done(function(d){
+				console.log(d)
+			})
+		})
+	</script>
+</html>

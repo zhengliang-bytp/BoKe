@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<link rel="stylesheet" href="../css/login.css">
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="top">
+				<img src="../img/logo.png" alt="">
+				<span>欢迎来到个人博客:请您注册</span>
+			</div>
+			<input type="text" id="name" placeholder="请输入用户名">
+			<input type="password" id="password" placeholder="请输入密码">
+			<button id="login">登录</button>
+			<a href="register.html">注册</a>
+		</div>
+	</body>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+	<script>
+		$(function(){
+			$("#login").click(function(){
+				var uname=$("#name").val()
+				var password=$("#password").val()
+				console.log(uname,password)
+				$.ajax({
+					url:"http://192.168.36.8/user/Login",
+					type:"post",
+					data:{
+						uname:uname,
+						password:password
+					},
+					success:function(d){
+						console.log(d)
+						if(d.status==1){
+							var str=JSON.stringify({token:d.msg,time:new Date().getMilliseconds()})
+							localStorage.setItem("user",str)
+							location.href="index.html"
+						}
+					}
+				})
+				// console.log(token)
+			})
+			
+		})
+	</script>
+</html>
